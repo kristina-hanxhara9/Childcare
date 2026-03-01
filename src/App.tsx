@@ -336,7 +336,7 @@ const Hero = () => {
                 className="absolute -bottom-6 -left-6 bg-white p-3 md:p-4 rounded-2xl shadow-xl border-b-4 border-sky-100 flex items-center gap-3 max-w-[200px] z-20"
               >
                 <div className="bg-yellow-100 p-2 rounded-full text-yellow-500">
-                  <Smile size={24} fill="currentColor" />
+                  <Star size={24} fill="currentColor" />
                 </div>
                 <div>
                   <p className="font-bold text-gray-800 text-sm md:text-base">Rated 5 Stars</p>
@@ -383,16 +383,16 @@ const WelcomeSection = () => {
               viewport={{ once: true }}
             >
               <h2 className="text-4xl font-display font-bold text-sky-900 mb-4 flex items-center gap-3">
-                <span>
-                  Welcome to <span className="underline decoration-wavy decoration-yellow-400">Our Childcare</span> Centre!
-                </span>
                 <motion.span
                   animate={{ y: [0, -8, 0], rotate: [0, 10, 0] }}
                   transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
-                  className="inline-block text-3xl md:text-4xl"
+                  className="inline-block text-3xl md:text-4xl shrink-0"
                 >
                   🧸
                 </motion.span>
+                <span>
+                  Welcome to <span className="underline decoration-wavy decoration-yellow-400">Our Childcare</span> Centre!
+                </span>
               </h2>
               <p className="text-lg text-gray-600 mb-10">
                 A nurturing place where children learn, play, and grow. We provide a safe haven for your little ones to explore their potential.
@@ -576,7 +576,7 @@ const ProgramsSection = () => {
         <div className="grid md:grid-cols-3 gap-8">
           <ProgramCard
             title="Infants"
-            age="0\u20132 Years"
+            age="0–2 Years"
             icon={Baby}
             color="#60A5FA"
             bg="#EFF6FF"
@@ -585,7 +585,7 @@ const ProgramsSection = () => {
           />
           <ProgramCard
             title="Toddlers"
-            age="2\u20134 Years"
+            age="2–4 Years"
             icon={Gamepad2}
             color="#F59E0B"
             bg="#FFFBEB"
@@ -594,7 +594,7 @@ const ProgramsSection = () => {
           />
           <ProgramCard
             title="Preschool"
-            age="4\u20136 Years"
+            age="4–6 Years"
             icon={BookOpen}
             color="#10B981"
             bg="#ECFDF5"
