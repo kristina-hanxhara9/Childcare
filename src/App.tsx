@@ -26,8 +26,7 @@ import {
   Sun,
   Cloud,
   Star,
-  Pencil,
-  Palette
+  Pencil
 } from 'lucide-react';
 
 // --- Components ---
@@ -277,7 +276,7 @@ const Hero = () => {
               Safe, Happy, and <span className="text-orange-500 inline-block">Growing</span> Every Day!
             </h1>
             <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-              A nurturing environment where your little ones can explore, learn, and make lifelong friends under expert care.
+              A nurturing environment where your little ones can explore, learn, and make lifelong friends under expert childcare.
             </p>
             <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
               <motion.button 
@@ -292,7 +291,7 @@ const Hero = () => {
                 whileTap={{ scale: 0.95 }}
                 className="bg-green-500 text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:bg-green-600 transition-colors"
               >
-                Enroll Now
+                Enrol Now
               </motion.button>
             </div>
           </motion.div>
@@ -383,13 +382,17 @@ const WelcomeSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl font-display font-bold text-sky-900 mb-4 flex flex-col md:block items-start gap-2">
-                <span className="flex items-center gap-3 md:hidden">
-                   <Palette className="text-orange-500" size={32} />
-                   <span>Welcome to</span>
+              <h2 className="text-4xl font-display font-bold text-sky-900 mb-4 flex items-center gap-3">
+                <span>
+                  Welcome to <span className="underline decoration-wavy decoration-yellow-400">Our Childcare</span> Centre!
                 </span>
-                <span className="hidden md:inline">Welcome to </span>
-                <span className="underline decoration-wavy decoration-yellow-400">Our Childcare</span> Center! <span className="inline-block align-middle text-3xl md:text-4xl">🧸</span>
+                <motion.span
+                  animate={{ y: [0, -8, 0], rotate: [0, 10, 0] }}
+                  transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
+                  className="inline-block text-3xl md:text-4xl"
+                >
+                  🧸
+                </motion.span>
               </h2>
               <p className="text-lg text-gray-600 mb-10">
                 A nurturing place where children learn, play, and grow. We provide a safe haven for your little ones to explore their potential.
@@ -478,39 +481,53 @@ const WelcomeSection = () => {
   );
 };
 
-const ProgramCard = ({ title, age, icon: Icon, color, bg, delay }: any) => (
-  <motion.div 
+const ProgramCard = ({ title, age, icon: Icon, color, bg, delay, features }: any) => (
+  <motion.div
     initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ delay, duration: 0.5 }}
     whileHover={{ y: -10 }}
-    className={`rounded-3xl p-4 md:p-8 text-center relative overflow-hidden group shadow-lg hover:shadow-2xl transition-all duration-300 border-b-8`}
-    style={{ backgroundColor: bg, borderColor: color }}
+    className="rounded-3xl text-center relative overflow-hidden group shadow-lg hover:shadow-2xl transition-all duration-300 bg-white"
   >
-    <div className="absolute top-0 left-0 w-full h-20 opacity-10 bg-white rounded-b-[50%] transform -translate-y-10"></div>
-    
-    <div className="relative z-10">
-      <div className="mx-auto w-14 h-14 md:w-20 md:h-20 rounded-full bg-white flex items-center justify-center mb-4 md:mb-6 shadow-sm text-gray-700">
-        <Icon className="w-6 h-6 md:w-10 md:h-10" style={{ color }} />
+    {/* Coloured header band */}
+    <div className="relative px-4 pt-6 pb-10 md:px-8 md:pt-8 md:pb-14" style={{ backgroundColor: bg }}>
+      <motion.div
+        animate={{ y: [0, -6, 0] }}
+        transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+        className="mx-auto w-16 h-16 md:w-24 md:h-24 rounded-2xl bg-white flex items-center justify-center shadow-lg text-gray-700"
+      >
+        <Icon className="w-7 h-7 md:w-11 md:h-11" style={{ color }} />
+      </motion.div>
+      {/* Emoji accent */}
+      <div className="absolute top-3 right-3 md:top-4 md:right-4 text-xl md:text-2xl opacity-60">
+        {title === 'Infants' ? '🧸' : title === 'Toddlers' ? '🦒' : '🎨'}
       </div>
-      
-      <h3 className="text-lg md:text-2xl font-display font-bold text-gray-800 mb-1 md:mb-2">{title}</h3>
-      <p className="text-xs md:text-base text-gray-600 font-medium mb-4 md:mb-6">{age}</p>
-      
-      <div className="mb-6 md:mb-8">
-        <div className="w-20 h-20 md:w-32 md:h-32 mx-auto bg-white/50 rounded-full flex items-center justify-center backdrop-blur-sm">
-           {/* Placeholder for illustration */}
-           <div className="text-2xl md:text-4xl">
-             {title === 'Infants' ? '🧸' : title === 'Toddlers' ? '🦒' : '🎨'}
-           </div>
-        </div>
+    </div>
+
+    {/* Content area */}
+    <div className="relative z-10 px-4 pb-5 pt-4 md:px-8 md:pb-8 md:pt-6 -mt-4 bg-white rounded-t-3xl">
+      <h3 className="text-lg md:text-2xl font-display font-bold text-gray-800 mb-1">{title}</h3>
+      <div className="inline-block text-xs md:text-sm font-bold px-3 py-1 rounded-full mb-4" style={{ backgroundColor: bg, color }}>
+        {age}
       </div>
 
-      <motion.button 
+      {/* Feature list */}
+      <ul className="text-left space-y-2 mb-5 md:mb-6">
+        {features.map((feat: string, i: number) => (
+          <li key={i} className="flex items-center gap-2 text-xs md:text-sm text-gray-600">
+            <span className="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: bg }}>
+              <Star className="w-3 h-3" style={{ color }} fill={color} />
+            </span>
+            {feat}
+          </li>
+        ))}
+      </ul>
+
+      <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="text-white font-bold py-2 px-4 md:py-3 md:px-8 text-sm md:text-base rounded-full shadow-md transition-colors w-full"
+        className="text-white font-bold py-2.5 px-4 md:py-3 md:px-8 text-sm md:text-base rounded-full shadow-md transition-colors w-full"
         style={{ backgroundColor: color }}
       >
         Learn More
@@ -557,29 +574,32 @@ const ProgramsSection = () => {
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          <ProgramCard 
-            title="Infants" 
-            age="0-2 Years" 
-            icon={Baby} 
-            color="#60A5FA" // Blue
+          <ProgramCard
+            title="Infants"
+            age="0\u20132 Years"
+            icon={Baby}
+            color="#60A5FA"
             bg="#EFF6FF"
             delay={0.1}
+            features={["Sensory play & exploration", "Gentle daily routines", "One-to-one bonding time"]}
           />
-          <ProgramCard 
-            title="Toddlers" 
-            age="2-4 Years" 
-            icon={Gamepad2} 
-            color="#F59E0B" // Orange/Yellow
+          <ProgramCard
+            title="Toddlers"
+            age="2\u20134 Years"
+            icon={Gamepad2}
+            color="#F59E0B"
             bg="#FFFBEB"
             delay={0.2}
+            features={["Creative arts & music", "Social skills development", "Outdoor adventure play"]}
           />
-          <ProgramCard 
-            title="Preschool" 
-            age="4-6 Years" 
-            icon={BookOpen} 
-            color="#10B981" // Green
+          <ProgramCard
+            title="Preschool"
+            age="4\u20136 Years"
+            icon={BookOpen}
+            color="#10B981"
             bg="#ECFDF5"
             delay={0.3}
+            features={["Early reading & writing", "Maths & problem solving", "School readiness programme"]}
           />
         </div>
       </div>
@@ -627,13 +647,13 @@ const TestimonialsSection = () => {
           {/* Testimonial Slider */}
           <div>
             <div className="flex items-center gap-4 mb-8">
-               <div className="text-4xl text-sky-300">
+               <div className="text-4xl text-orange-400">
                  <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H15.017C14.4647 8 14.017 8.44772 14.017 9V11C14.017 11.5523 13.5693 12 13.017 12H12.017V5H22.017V15C22.017 18.3137 19.3307 21 16.017 21H14.017ZM5.0166 21L5.0166 18C5.0166 16.8954 5.91203 16 7.0166 16H10.0166C10.5689 16 11.0166 15.5523 11.0166 15V9C11.0166 8.44772 10.5689 8 10.0166 8H6.0166C5.46432 8 5.0166 8.44772 5.0166 9V11C5.0166 11.5523 4.56889 12 4.0166 12H3.0166V5H13.0166V15C13.0166 18.3137 10.3303 21 7.0166 21H5.0166Z" /></svg>
                </div>
-               <h2 className="text-3xl font-display font-bold text-sky-900">What Parents Say!</h2>
+               <h2 className="text-3xl font-display font-bold text-orange-800">What Parents Say!</h2>
             </div>
 
-            <div className="bg-sky-50 rounded-3xl p-8 relative">
+            <div className="bg-orange-50 rounded-3xl p-8 relative border-2 border-orange-100">
               <motion.div
                 key={current}
                 initial={{ opacity: 0, x: 20 }}
@@ -649,15 +669,15 @@ const TestimonialsSection = () => {
                 />
                 <div>
                   <p className="text-lg text-gray-700 italic mb-4">"{testimonials[current].text}"</p>
-                  <p className="font-bold text-sky-600">— {testimonials[current].name}</p>
+                  <p className="font-bold text-orange-600">— {testimonials[current].name}</p>
                 </div>
               </motion.div>
 
               <div className="flex justify-center md:justify-end gap-2 mt-6">
-                <button onClick={prev} className="p-2 rounded-full bg-white text-sky-600 hover:bg-sky-600 hover:text-white transition-colors shadow-sm">
+                <button onClick={prev} className="p-2 rounded-full bg-white text-orange-500 hover:bg-orange-500 hover:text-white transition-colors shadow-sm">
                   <ChevronLeft size={20} />
                 </button>
-                <button onClick={next} className="p-2 rounded-full bg-white text-sky-600 hover:bg-sky-600 hover:text-white transition-colors shadow-sm">
+                <button onClick={next} className="p-2 rounded-full bg-white text-orange-500 hover:bg-orange-500 hover:text-white transition-colors shadow-sm">
                   <ChevronRight size={20} />
                 </button>
               </div>
@@ -710,7 +730,7 @@ const ContactSection = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-display font-bold text-orange-800 mb-4">Schedule a Visit</h2>
-          <p className="text-lg text-orange-700">Come see our center in action! We'd love to meet you.</p>
+          <p className="text-lg text-orange-700">Come see our centre in action! We'd love to meet you.</p>
         </div>
 
         <div className="bg-white/10 backdrop-blur-[2px] rounded-3xl p-8 shadow-xl border border-orange-100/30">
@@ -720,7 +740,7 @@ const ContactSection = () => {
               <input 
                 type="text" 
                 className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-orange-400 focus:ring-2 focus:ring-orange-200 outline-none transition-all bg-white"
-                placeholder="Jane Doe"
+                placeholder="Jane Smith"
               />
             </div>
             <div className="space-y-2">
@@ -728,7 +748,7 @@ const ContactSection = () => {
               <input 
                 type="tel" 
                 className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-orange-400 focus:ring-2 focus:ring-orange-200 outline-none transition-all bg-white"
-                placeholder="(555) 123-4567"
+                placeholder="07123 456789"
               />
             </div>
             <div className="space-y-2">
@@ -830,13 +850,13 @@ const Footer = () => {
             <h4 className="font-bold text-xl mb-4 text-orange-600">Contact Us</h4>
             <ul className="space-y-3 text-sky-800 font-medium">
               <li className="flex items-center gap-2">
-                <Phone size={18} className="text-orange-500" /> <span>(555) 123-4567</span>
+                <Phone size={18} className="text-orange-500" /> <span>07123 456789</span>
               </li>
               <li className="flex items-center gap-2">
                 <Mail size={18} className="text-orange-500" /> <span>hello@happykids.com</span>
               </li>
               <li className="flex items-center gap-2">
-                <MapPin size={18} className="text-orange-500" /> <span>123 Sunshine Ave</span>
+                <MapPin size={18} className="text-orange-500" /> <span>123 Sunshine Lane, London</span>
               </li>
             </ul>
             <div className="flex gap-4 mt-6">
