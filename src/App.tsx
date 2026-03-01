@@ -9,9 +9,6 @@ import {
   Heart, 
   Puzzle, 
   Smile, 
-  Baby, 
-  Gamepad2, 
-  BookOpen, 
   MapPin, 
   Calendar, 
   ChevronLeft, 
@@ -481,7 +478,7 @@ const WelcomeSection = () => {
   );
 };
 
-const ProgramCard = ({ title, age, icon: Icon, color, bg, delay, features }: any) => (
+const ProgramCard = ({ title, age, color, bg, delay, features, image }: any) => (
   <motion.div
     initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -490,17 +487,16 @@ const ProgramCard = ({ title, age, icon: Icon, color, bg, delay, features }: any
     whileHover={{ y: -10 }}
     className="rounded-3xl text-center relative overflow-hidden group shadow-lg hover:shadow-2xl transition-all duration-300 bg-white"
   >
-    {/* Coloured header band */}
-    <div className="relative px-4 pt-6 pb-10 md:px-8 md:pt-8 md:pb-14" style={{ backgroundColor: bg }}>
-      <motion.div
-        animate={{ y: [0, -6, 0] }}
-        transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-        className="mx-auto w-16 h-16 md:w-24 md:h-24 rounded-2xl bg-white flex items-center justify-center shadow-lg text-gray-700"
-      >
-        <Icon className="w-7 h-7 md:w-11 md:h-11" style={{ color }} />
-      </motion.div>
+    {/* Image header */}
+    <div className="relative h-40 md:h-52 overflow-hidden">
+      <img
+        src={image}
+        alt={title}
+        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
       {/* Emoji accent */}
-      <div className="absolute top-3 right-3 md:top-4 md:right-4 text-xl md:text-2xl opacity-60">
+      <div className="absolute top-3 right-3 md:top-4 md:right-4 text-xl md:text-2xl drop-shadow-lg">
         {title === 'Infants' ? '🧸' : title === 'Toddlers' ? '🦒' : '🎨'}
       </div>
     </div>
@@ -577,7 +573,7 @@ const ProgramsSection = () => {
           <ProgramCard
             title="Infants"
             age="0–2 Years"
-            icon={Baby}
+            image="https://images.pexels.com/photos/8909394/pexels-photo-8909394.jpeg?auto=compress&cs=tinysrgb&w=600"
             color="#60A5FA"
             bg="#EFF6FF"
             delay={0.1}
@@ -586,7 +582,7 @@ const ProgramsSection = () => {
           <ProgramCard
             title="Toddlers"
             age="2–4 Years"
-            icon={Gamepad2}
+            image="https://images.pexels.com/photos/1582736/pexels-photo-1582736.jpeg?auto=compress&cs=tinysrgb&w=600"
             color="#F59E0B"
             bg="#FFFBEB"
             delay={0.2}
@@ -595,7 +591,7 @@ const ProgramsSection = () => {
           <ProgramCard
             title="Preschool"
             age="4–6 Years"
-            icon={BookOpen}
+            image="https://images.pexels.com/photos/8613089/pexels-photo-8613089.jpeg?auto=compress&cs=tinysrgb&w=600"
             color="#10B981"
             bg="#ECFDF5"
             delay={0.3}
