@@ -317,7 +317,7 @@ const Hero = () => {
               <motion.div 
                  animate={{ y: [0, -15, 0] }}
                  transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-                 className="absolute top-16 -right-2 md:-right-6 text-6xl drop-shadow-lg z-20"
+                 className="absolute top-16 -right-2 md:-right-6 text-6xl drop-shadow-lg z-20 hidden md:block"
               >
                  🧸
               </motion.div>
@@ -389,7 +389,7 @@ const WelcomeSection = () => {
                    <span>Welcome to</span>
                 </span>
                 <span className="hidden md:inline">Welcome to </span>
-                <span className="underline decoration-wavy decoration-yellow-400">Our Childcare</span> Center!
+                <span className="underline decoration-wavy decoration-yellow-400">Our Childcare</span> Center! <span className="inline-block align-middle text-3xl md:text-4xl">🧸</span>
               </h2>
               <p className="text-lg text-gray-600 mb-10">
                 A nurturing place where children learn, play, and grow. We provide a safe haven for your little ones to explore their potential.
