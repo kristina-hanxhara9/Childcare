@@ -488,7 +488,7 @@ const ProgramCard = ({ title, age, color, bg, delay, features, image }: any) => 
     className="rounded-3xl text-center relative overflow-hidden group shadow-lg hover:shadow-2xl transition-all duration-300 bg-white"
   >
     {/* Image header */}
-    <div className="relative h-40 md:h-52 overflow-hidden">
+    <div className="relative aspect-[4/3] overflow-hidden">
       <img
         src={image}
         alt={title}
